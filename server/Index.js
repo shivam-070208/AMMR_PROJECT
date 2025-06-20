@@ -3,7 +3,7 @@ const app = express();
 const dotenv = require('dotenv');
 const cors = require('cors');
 const Connectdb = require('./config/connectDb')
-const cloudinary = require('cloudinary').v2;
+
 
 
 const Allowedorigin = [
@@ -11,14 +11,10 @@ const Allowedorigin = [
 ]
 
 //middlewares 
-cloudinary.config({
-    cloud_name:process.env.CLOUD_NAME,
-    api_key:process.env.CLOUDINARY_APIKEY,
-    api_secret:process.env.CLOUDINARY_APISECRET
-})
-
 dotenv.config();
 Connectdb()
+
+
 
 app.use(cors({
     origin:(origin,cb)=>{
@@ -33,6 +29,9 @@ app.use(cors({
 }))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
+
+//functions 
 
 
 app.post('/add',(req,res)=>{

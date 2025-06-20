@@ -1,21 +1,19 @@
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name:process.env.CLOUD_NAME,
-    api_key:process.env.CLOUDINARY_APIKEY,
-    api_secret:process.env.CLOUDINARY_APISECRET
+    cloud_name:process.env.CLOUD_NAME,//replace it with your cloud name
+    api_key:process.env.CLOUDINARY_APIKEY,// replace it with your cloud api
+    api_secret:process.env.CLOUDINARY_APISECRET // replace it with your cloud secret
 })
 
-const upload = async (file)=>{
-     try {
-         const result = await cloudinary.uploader.upload(filePath, {
-      folder: "items",
-     });
-        return result.secure_url;
-  } catch (err) {
-    console.error("Cloudinary Upload Error:", err);
-    throw err;
-  }
-}
+ const streamUpload = (fileBuffer) => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream({ folder: 'pizza_items' }, (err, result) => {
+          if (err) return reject(err);
+          resolve(result);
+        });
+        stream.end(fileBuffer);
+      });
+    };
 
-module.exports = upload;
+module.exports = streamUpload;

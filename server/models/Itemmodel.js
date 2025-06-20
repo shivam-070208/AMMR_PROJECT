@@ -14,9 +14,7 @@ const ItemSchema = new mongoose.Schema({
     CoverImage:{
         type:String
     },
-    AdditionalImage:{
-        type:String
-    }
+    AdditionalImage:[]
 })
 
 module.exports = new mongoose.model('Itemmodel',ItemSchema);

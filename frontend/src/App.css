@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+:root {
+  --color-nav-bg: #ffffffdd;
+  --color-nav-text: #1e1e1e;
+ --color-nav-text-secondary:blue;
+  --color-nav-shadow: rgba(0, 0, 0, 0.08);
+  --color-herosecondary: #773fe7ec;
+}
+
+.dark {
+  --color-nav-bg: #0e0e0ecc;
+  --color-nav-text: #ffffff;
+    --color-nav-text-secondary:white;
+  --color-nav-shadow: rgba(97, 94, 94, 0.347);
+  --color-herosecondary: #a386ff;
+}

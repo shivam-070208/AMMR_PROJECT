@@ -5,6 +5,11 @@
  --color-nav-text-secondary:blue;
   --color-nav-shadow: rgba(0, 0, 0, 0.08);
   --color-herosecondary: #773fe7ec;
+
+  --color-card-bg: #ffffff;
+  --color-card-border: #e5e5e5;
+  --color-card-text: #211b1b;
+  --color-card-subtext: #322f2f;
 }
 
 .dark {
@@ -13,4 +18,8 @@
     --color-nav-text-secondary:white;
   --color-nav-shadow: rgba(97, 94, 94, 0.347);
   --color-herosecondary: #a386ff;
+    --color-card-bg: #1c1c1c;
+  --color-card-border: #333333;
+  --color-card-text: #ffffff;
+  --color-card-subtext: #cccccc;
 }

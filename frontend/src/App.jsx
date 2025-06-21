@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import { motion } from 'motion/react';
 import { Route, Routes } from 'react-router-dom';
 import Add from './components/Add';
+import View from './components/View';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -14,7 +15,7 @@ const App = () => {
       <div className='w-screen p-2'>
         
      <Routes>
-      <Route path='/' />
+      <Route path='/' element={<View />} />
        <Route path='/add' element={<Add />} />
      </Routes>
       </div>

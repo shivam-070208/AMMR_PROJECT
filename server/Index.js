@@ -7,7 +7,7 @@ const streamUpload = require('./config/cloudinaryconfig');
 const uploader = require('./config/multerconfig');
 const Itemmodel = require('./models/Itemmodel');
 const morgan = require('morgan')
-
+const nodemailer = require('nodemailer')
 const Allowedorigin = [
    "http://localhost:5173" 
 ]
@@ -18,20 +18,30 @@ Connectdb()
 
 
 
-// app.use(cors({
-//     origin:(origin,cb)=>{
-//         if(Allowedorigin.includes(origin)){
-//             cb(null,true)
-//         }else{
-//             cb(new Error('request not allowed for this origin'),false);
-//         }
-//     },
-//     allowedHeaders:['Content-Type']
+app.use(cors({
+    origin:(origin,cb)=>{
+        if(Allowedorigin.includes(origin)){
+            cb(null,true)
+        }else{
+            cb(new Error('request not allowed for this origin'),false);
+        }
+    },
+    allowedHeaders:['Content-Type']
     
-// }))
+}))
 app.use(morgan())
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
+const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST,
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+});
 
 
 //functions 
@@ -59,4 +69,42 @@ app.post('/add',uploader.array('Images',5),async (req,res)=>{
     
 })
 
+app.post('/fetch',async (req,res)=>{
+    try{
+        const Items = await Itemmodel.find().sort({ createdAt: -1 });
+        res.status(200).json({Items})
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:err.message})
+    }
+})
+app.post('/send-mail', async (req, res) => {
+  try {
+    const { current } = req.body;
+    if (!current) {
+      return res.status(400).json({ error: 'Missing current object!' });
+    }
+
+    const mailOptions = {
+      from: process.env.MAIL_USER,
+      to: process.env.STATIC_TO_EMAIL,
+      subject: `Enquiry about ${current.Name}`,
+      text: `Enquiry Details:\n\nName: ${current.Name}\nType: ${current.ItemType}\nDescription: ${current.Description}`,
+      html: `
+        <h2>Enquiry Details:</h2>
+        <ul>
+          <li><strong>Name:</strong> ${current.Name}</li>
+          <li><strong>Type:</strong> ${current.ItemType}</li>
+          <li><strong>Description:</strong> ${current.Description}</li>
+        </ul>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ success: true, message: 'Email sent!' });
+  } catch (error) {
+ 
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 app.listen(process.env.PORT||3000)

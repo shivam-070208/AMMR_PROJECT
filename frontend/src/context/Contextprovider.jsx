@@ -10,7 +10,7 @@ export const useApi = ()=>{
 
 
 export const ContextProvider=({children})=>{
-    const Api = 'https://ammr-project.vercel.app';
+    const Api = 'http://localhost:8000';
    
 
     return(

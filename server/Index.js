@@ -9,7 +9,8 @@ const Itemmodel = require('./models/Itemmodel');
 const morgan = require('morgan')
 const nodemailer = require('nodemailer')
 const Allowedorigin = [
-   "http://localhost:5173" 
+   "http://localhost:5173",
+   "https://ammr-project-pb46.vercel.app"
 ]
 
 //middlewares 

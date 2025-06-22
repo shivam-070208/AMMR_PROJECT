@@ -10,7 +10,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   return (
     <div className='max-w-screen overflow-x-hidden '>
-         <motion.div animate={{ width:darkMode?'200%':'0%', height:darkMode?'200%':'0%' }} transition={{duration:0.3}} className="div rounded-full bg-black fixed -top-60 -left-60 -z-1" />
+        
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <div className='w-screen p-2'>
         
@@ -19,6 +19,7 @@ const App = () => {
        <Route path='/add' element={<Add />} />
      </Routes>
       </div>
+       <motion.div animate={{ width:darkMode?'200%':'0%', height:darkMode?'200%':'0%' }} transition={{duration:0.3}} className="div rounded-full bg-black fixed -top-60 -left-60 -z-1" />
     </div>
   )
 }

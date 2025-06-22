@@ -25,6 +25,7 @@ export default function View() {
     })();
   }, []);
 
+
   if (loading) {
     return (
       <>
@@ -100,8 +101,8 @@ const Card =({current})=>{
   }
     }
   return (
-    <motion.div layoutId={`{card-${current._id}`} className="w-full max-w-md fixed top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 mx-auto bg-white dark:bg-[var(--color-card-bg)] border border-[var(--color-card-border)] rounded-xl shadow-md overflow-hidden p-4">
-      {/* Carousel */}
+    <motion.div layoutId={`{card-${current._id}`} className="w-full max-w-md fixed top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 mx-auto bg-white dark:bg-[var(--color-card-bg)] border border-[var(--color-card-border)] rounded-xl shadow-md overflow-hidden p-4 z-100">
+    
       <div className="relative w-full h-48 mb-3 overflow-hidden rounded-md">
         {current.Images && current.Images.length > 0 ? (
           <>

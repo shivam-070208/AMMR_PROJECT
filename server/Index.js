@@ -22,7 +22,7 @@ Connectdb()
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (Postman/mobile apps) or allowed domains
+    
       if (!origin || Allowedorigin.includes(origin)) {
         return callback(null, true);
       } else {
@@ -50,7 +50,9 @@ const transporter = nodemailer.createTransport({
 
 
 //functions 
-
+app.get('/',(req,res)=>{
+  res.send('hello')
+})
 
 app.post('/add',uploader.array('Images',5),async (req,res)=>{
     const { Description, Name ,ItemType} = req.body

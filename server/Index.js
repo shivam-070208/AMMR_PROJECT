@@ -20,15 +20,7 @@ Connectdb()
 
 
 app.use(cors({
-    origin:(origin,cb)=>{
-        if(Allowedorigin.includes(origin)){
-          console.log(origin)
-            cb(null,true)
-        }else{
-            cb(new Error('request not allowed for this origin'),false);
-        }
-    },
-    allowedHeaders:['Content-Type']
+    origin: 'https://ammr-project-pb46.vercel.app'
     
 }))
 app.use(morgan())

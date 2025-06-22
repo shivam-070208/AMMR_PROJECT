@@ -19,10 +19,21 @@ Connectdb()
 
 
 
-app.use(cors({
-    origin: 'https://ammr-project-pb46.vercel.app'
-    
-}))
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (Postman/mobile apps) or allowed domains
+      if (!origin || Allowedorigin.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error('CORS not allowed for this origin'));
+      }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+  })
+);
 app.use(morgan())
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());

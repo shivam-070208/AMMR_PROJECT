@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { useContext } from "react";
 
 const Apicontext = createContext(null);
@@ -10,7 +10,7 @@ export const useApi = ()=>{
 
 
 export const ContextProvider=({children})=>{
-    const Api = 'http://localhost:8000';
+    const Api = 'https://ammr-project.vercel.app';
    
 
     return(

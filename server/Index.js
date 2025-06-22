@@ -9,8 +9,8 @@ const Itemmodel = require('./models/Itemmodel');
 const morgan = require('morgan')
 const nodemailer = require('nodemailer')
 const Allowedorigin = [
-   "http://localhost:5173",
-   "https://ammr-project-pb46.vercel.app"
+  "https://ammr-project-pb46.vercel.app",
+   "http://localhost:5173"
 ]
 
 //middlewares 
@@ -22,6 +22,7 @@ Connectdb()
 app.use(cors({
     origin:(origin,cb)=>{
         if(Allowedorigin.includes(origin)){
+          console.log(origin)
             cb(null,true)
         }else{
             cb(new Error('request not allowed for this origin'),false);
